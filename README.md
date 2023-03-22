@@ -10,11 +10,6 @@
 
 ### Prerequisites
 
-- npm
-  ```sh
-  npm install npm@latest -g
-  ```
-
 ### Installation
 
 _To get started with the project._
@@ -27,7 +22,11 @@ _To get started with the project._
    ```sh
    npm install
    ```
-3. Start the application
+3. npm
+  ```sh
+  npm install npm@latest -g
+  ```
+4. Start the application
    ```sh
    npm start
    ```
