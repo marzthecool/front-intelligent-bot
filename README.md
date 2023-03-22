@@ -23,9 +23,9 @@ _To get started with the project._
    npm install
    ```
 3. npm
-  ```sh
-  npm install npm@latest -g
-  ```
+   ```sh
+   npm install npm@latest -g
+   ```
 4. Start the application
    ```sh
    npm start
