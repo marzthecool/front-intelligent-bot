@@ -3,7 +3,7 @@ import { useTheme } from "@mui/material/styles";
 import Logo from "../components/Logo";
 //////////////////////////////////////
 
-const Home = ({ setAuth }) => {
+const Bot = ({ setAuth }) => {
   const theme = useTheme();
 
   return (
@@ -39,7 +39,7 @@ const Home = ({ setAuth }) => {
         Welcome Back
       </Typography>
 
-      <Button size="large" variant="contained" onClick={() => setAuth(false)}>
+      <Button size="large" variant="contained" onClick={event => window.location.href='/landing'}>
         Log out
       </Button>
     </Container>
@@ -75,4 +75,4 @@ const Home = ({ setAuth }) => {
 //     ))}
 //   </motion.span>
 // );
-export default Home;
+export default Bot;

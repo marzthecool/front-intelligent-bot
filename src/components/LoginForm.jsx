@@ -31,7 +31,7 @@ const animate = {
 const LoginForm = ({ setAuth }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
+  const from = location.state?.from?.pathname || "/bot";
 
   const [showPassword, setShowPassword] = useState(false);
 
