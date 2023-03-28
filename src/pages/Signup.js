@@ -2,7 +2,7 @@ import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { Container, Typography, Link, Box } from "@mui/material";
 import styled from "@emotion/styled";
-
+// fix
 // import SocialAuth from "../components/SocialAuth";
 import SignupForm from "../components/SignupForm";
 import Logo from "../components/Logo";
