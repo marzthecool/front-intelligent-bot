@@ -1,6 +1,6 @@
 import * as React from 'react';
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
 
 export default function ToggleButtons() {
   const [alignment, setAlignment] = React.useState('esp');
@@ -10,18 +10,20 @@ export default function ToggleButtons() {
   };
 
   return (
-    <ToggleButtonGroup
+    <ButtonGroup
       value={alignment}
       exclusive
       onChange={handleAlignment}
       aria-label="select language"
+      sx={{backgroundColor: 'black', marginTop: 0.5}}
+      variant="text"
     >
-      <ToggleButton value="esp" aria-label="esp">
+      <Button value="esp" aria-label="esp" sx={{color: 'white'}}>
         Esp
-      </ToggleButton>
-      <ToggleButton value="eng" aria-label="eng">
+      </Button>
+      <Button value="eng" aria-label="eng" sx={{color: 'white'}}>
         Eng
-      </ToggleButton>
-    </ToggleButtonGroup>
+      </Button>
+    </ButtonGroup>
   );
 }
