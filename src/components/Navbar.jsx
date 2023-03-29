@@ -1,12 +1,12 @@
 import * as React from 'react';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
-import { Grid, Box, AppBar, Toolbar, Typography } from '@mui/material';
+import {Grid, Box, AppBar, Toolbar, Typography} from '@mui/material';
 import ToggleButton from './ToggleButton';
 
 const Navbar = () => {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    <Box sx={{ flexGrow: 1}}>
+      <AppBar position="static" sx={{backgroundColor: 'black'}}>
         <Grid container>
           <Grid item xs={10}>
             <Toolbar>
@@ -30,7 +30,7 @@ const Navbar = () => {
               </Typography>
             </Toolbar>
           </Grid>
-          <Grid sx={{ marginTop: 1, marginLeft: 12 }}>
+          <Grid sx={{ marginTop: 1, marginLeft: 12}}>
             <ToggleButton />
           </Grid>
         </Grid>

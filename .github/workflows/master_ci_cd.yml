@@ -28,7 +28,11 @@ jobs:
       - name: build react, output in build
         run: |
           npm run build
-      
+          
+      - name: cp index to 200
+        run: |
+          cp build/index.html build/200.html
+
       - name: show dir, .env file
         run: |
           ls -la build
