@@ -4,10 +4,8 @@ import { Link as RouterLink } from "react-router-dom";
 import { Container, Typography, Link, Box } from "@mui/material";
 import styled from "@emotion/styled";
 import LoginForm from "../components/LoginForm";
-import Logo from "../components/Logo";
 import { motion } from "framer-motion";
 
-//////////////////////////////////
 const RootStyle = styled("div")({
   background: "rgb(249, 250, 251)",
   height: "100vh",
@@ -20,13 +18,12 @@ const HeadingStyle = styled(Box)({
 });
 
 const ContentStyle = styled("div")({
-  maxWidth: 480,
-  padding: 25,
+  maxWidth: 580,
+  padding: 65,
   margin: "auto",
   display: "flex",
   justifyContent: "center",
   flexDirection: "column",
-  background: "#fff",
 });
 
 let easing = [0.6, -0.05, 0.01, 0.99];
@@ -49,29 +46,24 @@ const fadeInUp = {
 const Login = ({ setAuth }) => {
   return (
     <RootStyle>
-      <Container maxWidth="sm">
+      <Container maxWidth="md" sx={{border: 1}}>
         <ContentStyle>
           <HeadingStyle component={motion.div} {...fadeInUp}>
-            <Logo />
-            <Typography sx={{ color: "text.secondary", mb: 5 }}>
-              Login to your account
-            </Typography>
+          <Typography variant='h3' align='center'>
+            Iniciar Sesión
+          </Typography>
+          <Typography component={motion.p} {...fadeInUp} variant="body2" align="center" sx={{marginBottom: 3}}>
+            ¿No tienes una cuenta?{" "}
+            <Link variant="subtitle2" component={RouterLink} to="/signup" sx={{color: 'black'}}>
+              Registrate
+            </Link>
+            {" "} para continuar.
+          </Typography>
           </HeadingStyle>
           {/*Secuencia completa de Login*/}
           <LoginForm setAuth={setAuth} />
           {/*Texto inferior*/}
-          <Typography
-            component={motion.p}
-            {...fadeInUp}
-            variant="body2"
-            align="center"
-            sx={{ mt: 3 }}
-          >
-            Don’t have an account?{" "}
-            <Link variant="subtitle2" component={RouterLink} to="/signup">
-              Sign up
-            </Link>
-          </Typography>
+          
         </ContentStyle>
       </Container>
     </RootStyle>

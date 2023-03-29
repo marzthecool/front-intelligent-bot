@@ -37,9 +37,9 @@ const LoginForm = ({ setAuth }) => {
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string()
-      .email("Provide a valid email address")
-      .required("Email is required"),
-    password: Yup.string().required("Password is required"),
+      .email("Correo invalido")
+      .required("Ingresa un correo"),
+    password: Yup.string().required("Ingresa una contraseña"),
   });
 
   const formik = useFormik({
@@ -87,7 +87,7 @@ const LoginForm = ({ setAuth }) => {
               fullWidth
               autoComplete="username"
               type="email"
-              label="Email Address"
+              label="Correo Electronico"
               {...getFieldProps("email")}
               error={Boolean(touched.email && errors.email)}
               helperText={touched.email && errors.email}
@@ -97,7 +97,7 @@ const LoginForm = ({ setAuth }) => {
               fullWidth
               autoComplete="current-password"
               type={showPassword ? "text" : "password"}
-              label="Password"
+              label="Contraseña"
               {...getFieldProps("password")}
               error={Boolean(touched.password && errors.password)}
               helperText={touched.password && errors.password}
@@ -137,7 +137,7 @@ const LoginForm = ({ setAuth }) => {
                     checked={values.remember}
                   />
                 }
-                label="Remember me"
+                label="Recuerdame"
               />
 
               <Link
@@ -146,7 +146,7 @@ const LoginForm = ({ setAuth }) => {
                 to="#"
                 underline="hover"
               >
-                Forgot password?
+                Recuperar Contraseña
               </Link>
             </Stack>
 
@@ -157,7 +157,7 @@ const LoginForm = ({ setAuth }) => {
               variant="contained"
               loading={isSubmitting}
             >
-              {isSubmitting ? "loading..." : "Login"}
+              {isSubmitting ? "Cargando..." : "Iniciar Sesión"}
             </LoadingButton>
           </Box>
         </Box>
