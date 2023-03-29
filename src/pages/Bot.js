@@ -1,7 +1,5 @@
-import { Button, Typography, Container, Box } from "@mui/material";
+import { Button, Typography, Container} from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import Logo from "../components/Logo";
-//////////////////////////////////////
 
 const Bot = ({ setAuth }) => {
   const theme = useTheme();
@@ -17,9 +15,6 @@ const Bot = ({ setAuth }) => {
         height: "100vh",
       }}
     >
-      <Box sx={{ mb: 5, mt: -10 }}>
-        <Logo />
-      </Box>
       <Typography
         sx={{
           textAlign: "center",
@@ -36,7 +31,11 @@ const Bot = ({ setAuth }) => {
         }}
         gutterBottom
       >
-        Welcome Back
+        Selecciona una categoria
+      </Typography>
+
+      <Typography variant="subtitle1" sx={{color: 'black'}}>
+              Texto   Musica    Fotos
       </Typography>
 
       <Button size="large" variant="contained" onClick={event => window.location.href='/landing'}>
