@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { CssBaseline } from "@mui/material";
 import { Route, Routes, Navigate, useLocation } from "react-router-dom";
+import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Landing from "./pages/Landing";
@@ -12,6 +13,9 @@ function App() {
 
   return (
     <>
+      <div>
+        <Navbar />
+      </div>
       <CssBaseline />
       <Routes>
         <Route path="/landing" element={<Landing setAuth={setAuth} />} />
