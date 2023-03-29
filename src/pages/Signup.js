@@ -2,10 +2,7 @@ import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { Container, Typography, Link, Box } from "@mui/material";
 import styled from "@emotion/styled";
-// fix
-// import SocialAuth from "../components/SocialAuth";
 import SignupForm from "../components/SignupForm";
-import Logo from "../components/Logo";
 import { motion } from "framer-motion";
 
 //////////////////////////////////
@@ -50,48 +47,26 @@ const fadeInUp = {
 const Signup = ({ setAuth }) => {
   return (
     <RootStyle>
-      <Container maxWidth="sm">
+      <Container maxWidth="sm" sx={{border: 1}}>
         <ContentStyle>
           <HeadingStyle component={motion.div} {...fadeInUp}>
-            <Logo />
-
-            <Typography sx={{ color: "text.secondary", mb: 5 }}>
-              Enter your details below.
-            </Typography>
+          <Typography variant='h3' align='center' sx={{marginBottom: 1, marginTop: 3}}>
+            Crear nueva cuenta
+          </Typography>
+          <Typography
+            component={motion.p}
+            {...fadeInUp}
+            variant="body2"
+            align="center"
+            sx={{marginBottom: 3}}
+          >
+            ¿Ya tienes una cuenta?{" "}
+            <Link variant="subtitle2" component={RouterLink} to="/login" sx={{color: 'black'}}>
+              Iniciar Sesión
+            </Link>
+          </Typography>
           </HeadingStyle>
-
           <SignupForm setAuth={setAuth} />
-
-          <Typography
-            component={motion.p}
-            {...fadeInUp}
-            variant="body2"
-            align="center"
-            sx={{ color: "text.secondary", mt: 2 }}
-          >
-            By registering, I agree to{" "}
-            <Link underline="always" color="text.primary" href="#">
-              Terms of Service
-            </Link>{" "}
-            &{" "}
-            <Link underline="always" color="text.primary" href="#">
-              Privacy Policy
-            </Link>
-            .
-          </Typography>
-
-          <Typography
-            component={motion.p}
-            {...fadeInUp}
-            variant="body2"
-            align="center"
-            sx={{ mt: 3 }}
-          >
-            Have an account?{" "}
-            <Link variant="subtitle2" component={RouterLink} to="/login">
-              Login
-            </Link>
-          </Typography>
         </ContentStyle>
       </Container>
     </RootStyle>

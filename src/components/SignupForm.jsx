@@ -32,17 +32,17 @@ const SignupForm = ({ setAuth }) => {
 
   const SignupSchema = Yup.object().shape({
     firstName: Yup.string()
-      .min(2, "Too Short!")
-      .max(50, "Too Long!")
-      .required("First name required"),
+      .min(2, "Muy corto")
+      .max(50, "Muy largo")
+      .required("Ingresa tu nombre(s)"),
     lastName: Yup.string()
-      .min(2, "Too Short!")
-      .max(50, "Too Long!")
-      .required("Last name required"),
+      .min(2, "Muy corto")
+      .max(50, "Muy largo")
+      .required("Ingresa tu apellido(s)"),
     email: Yup.string()
-      .email("Email must be a valid email address")
-      .required("Email is required"),
-    password: Yup.string().required("Password is required"),
+      .email("Correo invalido")
+      .required("Ingresa un correo"),
+  password: Yup.string().required("Ingresa una contraseña"),
   });
 
   const formik = useFormik({
@@ -76,7 +76,7 @@ const SignupForm = ({ setAuth }) => {
           >
             <TextField
               fullWidth
-              label="First name"
+              label="Nombre(s)"
               {...getFieldProps("firstName")}
               error={Boolean(touched.firstName && errors.firstName)}
               helperText={touched.firstName && errors.firstName}
@@ -84,7 +84,7 @@ const SignupForm = ({ setAuth }) => {
 
             <TextField
               fullWidth
-              label="Last name"
+              label="Apellido(s)"
               {...getFieldProps("lastName")}
               error={Boolean(touched.lastName && errors.lastName)}
               helperText={touched.lastName && errors.lastName}
@@ -101,7 +101,7 @@ const SignupForm = ({ setAuth }) => {
               fullWidth
               autoComplete="username"
               type="email"
-              label="Email address"
+              label="Correo Electronico"
               {...getFieldProps("email")}
               error={Boolean(touched.email && errors.email)}
               helperText={touched.email && errors.email}
@@ -111,7 +111,7 @@ const SignupForm = ({ setAuth }) => {
               fullWidth
               autoComplete="current-password"
               type={showPassword ? "text" : "password"}
-              label="Password"
+              label="Contraseña"
               {...getFieldProps("password")}
               InputProps={{
                 endAdornment: (
@@ -146,7 +146,7 @@ const SignupForm = ({ setAuth }) => {
               variant="contained"
               loading={isSubmitting}
             >
-              Sign up
+              Registrarme
             </LoadingButton>
           </Box>
         </Stack>
