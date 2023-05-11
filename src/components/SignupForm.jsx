@@ -12,6 +12,7 @@ import {
 import { LoadingButton } from "@mui/lab";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
+import UserService from "../services/users.service";
 
 /////////////////////////////////////////////////////////////
 let easing = [0.6, -0.05, 0.01, 0.99];
@@ -26,12 +27,22 @@ const animate = {
 };
 
 const SignupForm = ({ setAuth }) => {
+  const signup = (name, email, password, age, comments) => {
+  
+    console.log("Entre a signup");
+    console.log(name);
+    console.log(email);
+    console.log(password);
+    console.log(comments);
+    UserService.signup(name, email, password, age, comments);
+    //e.preventDefault();  
+  }
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
 
   const SignupSchema = Yup.object().shape({
-    firstName: Yup.string()
+    name: Yup.string()
       .min(2, "Muy corto")
       .max(50, "Muy largo")
       .required("Ingresa tu nombre(s)"),
@@ -47,13 +58,14 @@ const SignupForm = ({ setAuth }) => {
 
   const formik = useFormik({
     initialValues: {
-      firstName: "",
+      name: "",
       lastName: "",
       email: "",
       password: "",
     },
     validationSchema: SignupSchema,
-    onSubmit: () => {
+    onSubmit: (values) => {
+      signup(values.name, values.email, values.password, 1, "Testeo");
       setTimeout(() => {
         setAuth(true);
         navigate("/", { replace: true });
@@ -77,9 +89,10 @@ const SignupForm = ({ setAuth }) => {
             <TextField
               fullWidth
               label="Nombre(s)"
-              {...getFieldProps("firstName")}
-              error={Boolean(touched.firstName && errors.firstName)}
-              helperText={touched.firstName && errors.firstName}
+              {...getFieldProps("name")}
+              error={Boolean(touched.name && errors.name)}
+              helperText={touched.name && errors.name}
+              value = {formik.values.name}
             />
 
             <TextField
@@ -105,6 +118,7 @@ const SignupForm = ({ setAuth }) => {
               {...getFieldProps("email")}
               error={Boolean(touched.email && errors.email)}
               helperText={touched.email && errors.email}
+              value = {formik.values.email}
             />
 
             <TextField
@@ -129,6 +143,7 @@ const SignupForm = ({ setAuth }) => {
                   </InputAdornment>
                 ),
               }}
+              value = {formik.values.password}
               error={Boolean(touched.password && errors.password)}
               helperText={touched.password && errors.password}
             />

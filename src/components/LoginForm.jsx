@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import { Form, FormikProvider, useFormik } from "formik";
 import * as Yup from "yup";
+import UserService from "../services/users.service";
 
 import {
   Box,
@@ -29,6 +30,13 @@ const animate = {
 };
 
 const LoginForm = ({ setAuth }) => {
+  const login = (email, password) => {
+  
+    console.log("Entre a login");
+    UserService.login(email, password);
+    //e.preventDefault();  
+  }
+  
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/bot";
@@ -49,7 +57,8 @@ const LoginForm = ({ setAuth }) => {
       remember: true,
     },
     validationSchema: LoginSchema,
-    onSubmit: () => {
+    onSubmit: (values) => {
+      login(values.email,values.password);
       console.log("submitting...");
       setTimeout(() => {
         console.log("submited!!");
@@ -91,6 +100,7 @@ const LoginForm = ({ setAuth }) => {
               {...getFieldProps("email")}
               error={Boolean(touched.email && errors.email)}
               helperText={touched.email && errors.email}
+              value= {formik.values.email}
             />
 
             <TextField
@@ -116,6 +126,7 @@ const LoginForm = ({ setAuth }) => {
                   </InputAdornment>
                 ),
               }}
+            value= {formik.values.password}
             />
           </Box>
 

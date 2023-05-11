@@ -2,43 +2,55 @@
 
 //const db = firebase.collection("/memes");
 
-class KafkaService {
+class UserService {
 
-    url = 'https://kafka-express-service-kafka-adsoftsito.cloud.okteto.net/';
+    url = 'http://localhost:8080/api';
 
-    reaction = async (name) => {
+    signup = async (name, email, password, age, comments) => {
 
-    await fetch(this.url + 'like?name=' + name, {
-        method: 'GET',
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-        },
-    })
-        .then((response) => console.log(response.json()))
-        .then((data) => {
-        console.log(data);
+        await fetch(this.url+"/users", {
+            method: 'POST',
+            body: JSON.stringify({
+                name: name,
+                email: email,
+                password: password,
+                age: age,
+                comments: comments,
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
         })
-        .catch((err) => {
-            console.log(err.message);
-        });
-    }
+            .then((response) => {
+                console.log("Registro el usuario con pswrd");
+                console.log(response.json());
+            })
+            .then((data) => {
+                console.log(data);
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
+        }
 
-    addReaction = async (title, body) => {
+    login = async (email, password) => {
 
-    await fetch('https://jsonplaceholder.typicode.com/posts', {
+    await fetch(this.url+"/login", {
         method: 'POST',
         body: JSON.stringify({
-            title: title,
-            body: body,
-            userId: Math.random().toString(36).slice(2),
+            email: email,
+            password: password,
         }),
         headers: {
             'Content-type': 'application/json; charset=UTF-8',
         },
     })
-        .then((response) => console.log(response.json()))
+        .then((response) => {
+            console.log("Logeo el usuario con pswrd");
+            console.log(response.json());
+        })
         .then((data) => {
-            console.loge(data);
+            console.log(data);
         })
         .catch((err) => {
             console.log(err.message);
@@ -50,4 +62,4 @@ class KafkaService {
     }
 }
 
-export default new KafkaService();
+export default new UserService();
