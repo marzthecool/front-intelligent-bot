@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Landing from "./pages/Landing";
 import Bot from "./pages/Bot";
+import Davinci from "./components/text-davinci-003"
 
 function App() {
   const [auth, setAuth] = useState(false);
@@ -22,7 +23,8 @@ function App() {
         <Route path="/login" element={<Login setAuth={setAuth} />} />
         <Route path="/signup" element={<Signup setAuth={setAuth} />} />
         <Route path="/bot" element={<Bot setAuth={setAuth} />} />
-        <Route path="/" element={auth ? (<Landing setAuth={setAuth} />) : (<Navigate to="/landing" state={{ from: location }} replace />)} />
+        <Route path="/" element={<Davinci setAuth={setAuth} />}/>
+        <Route path="/test" element={auth ? (<Landing setAuth={setAuth} />) : (<Navigate to="/landing" state={{ from: location }} replace />)} />
       </Routes>
     </>
   );
