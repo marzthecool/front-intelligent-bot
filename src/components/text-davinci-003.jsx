@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "./text-davinci-003.css";
 import DaVinciText from "../services/text-davinci-003/davinci-003"
 import LogService from "../services/logs.service";
+import logsService from "../services/logs.service";
 
 export default function Textdavinci003() {
   const [animalInput, setAnimalInput] = useState("");
@@ -34,13 +35,13 @@ export default function Textdavinci003() {
     }
   }
 
-  const LogForm = ({ setAuth }) => {
-    const log = (userid, model, prompt, result) => {
+  const LogForm = ({ _setAuth }) => {
+    //const log = (userid, model, prompt, result) => {
     
       console.log("Entre a logs");
-      LogService.createLog(userid, model, prompt, result);
+      LogService.createLog(1, "DaVinci", "How are you?", "Fine, thank you!");
       //e.preventDefault();  
-    }
+    //}
   }
   
   return (
@@ -57,7 +58,7 @@ export default function Textdavinci003() {
         />
         <input type="submit" value="Generate names" />
       </form>
-      <button></button>
+      <button onClick={LogForm}>Test LogForm</button>
       <div className={styles.result}>{result}</div>
       </main>
     </div>

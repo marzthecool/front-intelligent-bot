@@ -18,6 +18,7 @@ class LogsService {
             }),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
+                'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjg0OTY4ODA0LCJleHAiOjE3NzEzNjg4MDR9.Uez2VPCifl9Bt6PQDT3fOzLTPpRRD6PYvJno3977RIs'
             },
         })
             .then((response) => {
