@@ -7,10 +7,13 @@ import Signup from "./pages/Signup";
 import Landing from "./pages/Landing";
 import Bot from "./pages/Bot";
 import Davinci from "./components/text-davinci-003"
+import { useTranslation } from "react-i18next";
+
 
 function App() {
   const [auth, setAuth] = useState(false);
   const location = useLocation();
+  const { t } = useTranslation();
 
   return (
     <>

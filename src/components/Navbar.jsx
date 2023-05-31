@@ -1,9 +1,12 @@
 import * as React from 'react';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import {Grid, Box, AppBar, Toolbar, Typography} from '@mui/material';
-import ToggleButton from './ToggleButton';
+import { useTranslation } from "react-i18next";
+import LanguageSelect from "./LanguageSelect";
+
 
 const Navbar = () => {
+  const { t } = useTranslation();
   return (
     <Box sx={{ flexGrow: 1}}>
       <AppBar position="static" sx={{backgroundColor: 'black'}}>
@@ -30,9 +33,15 @@ const Navbar = () => {
               </Typography>
             </Toolbar>
           </Grid>
-          <Grid sx={{ marginTop: 1, marginLeft: 12}}>
-            <ToggleButton />
-          </Grid>
+          <div className="flex flex-fixed">
+            <div className="ml1 pointer black">
+              {t('select_language')}
+            </div>
+            <div className="ml1 pointer black"> : </div>
+            <div>     
+              <LanguageSelect className="ml1 pointer black"/>
+            </div>
+          </div>
         </Grid>
       </AppBar>
     </Box>
