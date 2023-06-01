@@ -1,7 +1,27 @@
 {
- "select_language": "Selecciona el idioma",
- "hello_welcome_to_react": "Hola, Bienvenido a React",
- "this_is_an_example": "Esto es un ejemplo",
- "please_enter_name": "Por favor introduce tu nombre"
+  "select_language": "Selecciona el idioma",
+  "login_title": "Iniciar Sesión",
+  "login_subtitle_1": "¿No tienes una cuenta? ",
+	"login_subtitle_2": " para continuar.",
+	"login_subtitle_link": "Registrate",
+  "email": "Correo Electrónico",
+	"password": "Contraseña",
+  "login_remember": "Recuérdame",
+  "login_recover": "Recuperar contraseña",
+  "login_button": "Iniciar sesión",
+	"login_buffer": "Cargando...",
+  "email_error": "Correo invalido",
+	"email_empty": "Ingresa un correo",
+	"password_empty": "Ingresa una contraseña",
+  "signup_title": "Crear nueva cuenta",
+	"signup_subtitle": "¿Ya tienes una cuenta? ",
+	"signup_link": "Iniciar sesión",
+	"signup_name": "Nombre(s)",
+	"signup_last": "Apellido",
+  "signup_short": "Muy corto",
+	"signup_long": "Muy largo",
+	"signup_name_empty": "Ingresa tu(s) nombre(s)",
+	"signup_last_empty": "Ingresa tu apellido",
+  "signup_button": "Registrarme"
 }
 

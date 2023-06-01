@@ -5,6 +5,7 @@ import { Container, Typography, Link, Box } from "@mui/material";
 import styled from "@emotion/styled";
 import LoginForm from "../components/LoginForm";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 const RootStyle = styled("div")({
   background: "rgb(249, 250, 251)",
@@ -44,20 +45,21 @@ const fadeInUp = {
 };
 
 const Login = ({ setAuth }) => {
+  const { t } = useTranslation();
   return (
     <RootStyle>
       <Container maxWidth="md" sx={{border: 1}}>
         <ContentStyle>
           <HeadingStyle component={motion.div} {...fadeInUp}>
           <Typography variant='h3' align='center'>
-            Iniciar Sesión
+            {t("login_title")}
           </Typography>
           <Typography component={motion.p} {...fadeInUp} variant="body2" align="center" sx={{marginBottom: 3}}>
-            ¿No tienes una cuenta?{" "}
+            {t("login_subtitle_1")}
             <Link variant="subtitle2" component={RouterLink} to="/signup" sx={{color: 'black'}}>
-              Registrate
+              {t("login_subtitle_link")}
             </Link>
-            {" "} para continuar.
+            {t("login_subtitle_2")}
           </Typography>
           </HeadingStyle>
           {/*Secuencia completa de Login*/}

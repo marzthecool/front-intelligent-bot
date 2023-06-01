@@ -17,6 +17,7 @@ import {
 import { LoadingButton } from "@mui/lab";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
+import { t } from "i18next";
 
 let easing = [0.6, -0.05, 0.01, 0.99];
 const animate = {
@@ -45,9 +46,9 @@ const LoginForm = ({ setAuth }) => {
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string()
-      .email("Correo invalido")
-      .required("Ingresa un correo"),
-    password: Yup.string().required("Ingresa una contraseña"),
+      .email(t("email_error"))
+      .required(t("email_empty")),
+    password: Yup.string().required(t("password_empty")),
   });
 
   const formik = useFormik({
@@ -96,7 +97,7 @@ const LoginForm = ({ setAuth }) => {
               fullWidth
               autoComplete="username"
               type="email"
-              label="Correo Electronico"
+              label={t("email")}
               {...getFieldProps("email")}
               error={Boolean(touched.email && errors.email)}
               helperText={touched.email && errors.email}
@@ -107,7 +108,7 @@ const LoginForm = ({ setAuth }) => {
               fullWidth
               autoComplete="current-password"
               type={showPassword ? "text" : "password"}
-              label="Contraseña"
+              label={t("password")}
               {...getFieldProps("password")}
               error={Boolean(touched.password && errors.password)}
               helperText={touched.password && errors.password}
@@ -148,7 +149,7 @@ const LoginForm = ({ setAuth }) => {
                     checked={values.remember}
                   />
                 }
-                label="Recuerdame"
+                label={t("login_remember")}
               />
 
               <Link
@@ -157,7 +158,7 @@ const LoginForm = ({ setAuth }) => {
                 to="#"
                 underline="hover"
               >
-                Recuperar Contraseña
+                {t("login_recover")}
               </Link>
             </Stack>
 
@@ -168,7 +169,7 @@ const LoginForm = ({ setAuth }) => {
               variant="contained"
               loading={isSubmitting}
             >
-              {isSubmitting ? "Cargando..." : "Iniciar Sesión"}
+              {isSubmitting ? <>{t("login_buffer")}</> : <>{t("login_button")}</>}
             </LoadingButton>
           </Box>
         </Box>

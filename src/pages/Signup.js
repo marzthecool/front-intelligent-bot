@@ -4,6 +4,7 @@ import { Container, Typography, Link, Box } from "@mui/material";
 import styled from "@emotion/styled";
 import SignupForm from "../components/SignupForm";
 import { motion } from "framer-motion";
+import { t } from "i18next";
 
 //////////////////////////////////
 const RootStyle = styled("div")({
@@ -51,7 +52,7 @@ const Signup = ({ setAuth }) => {
         <ContentStyle>
           <HeadingStyle component={motion.div} {...fadeInUp}>
           <Typography variant='h3' align='center' sx={{marginBottom: 1, marginTop: 3}}>
-            Crear nueva cuenta
+            {t("signup_title")}
           </Typography>
           <Typography
             component={motion.p}
@@ -60,9 +61,9 @@ const Signup = ({ setAuth }) => {
             align="center"
             sx={{marginBottom: 3}}
           >
-            ¿Ya tienes una cuenta?{" "}
+            {t("signup_subtitle")}
             <Link variant="subtitle2" component={RouterLink} to="/login" sx={{color: 'black'}}>
-              Iniciar Sesión
+              {t("signup_link")}
             </Link>
           </Typography>
           </HeadingStyle>
