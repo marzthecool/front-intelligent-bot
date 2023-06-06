@@ -5,7 +5,6 @@ import DaVinciText from "../services/text-davinci-003/davinci-003"
 import LogService from "../services/logs.service";
 //import "./App.css";
 import { Configuration, OpenAIApi } from "openai";
-const axios = require('axios');
 
 export default function Textdavinci003() {
   //Completion
