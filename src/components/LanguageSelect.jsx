@@ -15,9 +15,12 @@ const LanguageSelect = () => {
   const [menuAnchor, setMenuAnchor] = React.useState(null);
 
   React.useEffect(() => {
+    console.log(selected);
     if (selected === "en-US"){
         document.body.dir = languageMap["en"].dir;
-    }  
+    }  else if (selected === "es-ES"){
+      document.body.dir = languageMap["sp"].dir;
+  } 
     else{
         document.body.dir = languageMap[selected].dir;
     }
