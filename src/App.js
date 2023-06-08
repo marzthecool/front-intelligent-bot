@@ -25,9 +25,8 @@ function App() {
         <Route path="/landing" element={<Landing setAuth={setAuth} />} />
         <Route path="/login" element={<Login setAuth={setAuth} />} />
         <Route path="/signup" element={<Signup setAuth={setAuth} />} />
-        <Route path="/bot" element={<Bot setAuth={setAuth} />} />
-        <Route path="/" element={<Davinci setAuth={setAuth} />}/>
-        <Route path="/test" element={auth ? (<Landing setAuth={setAuth} />) : (<Navigate to="/landing" state={{ from: location }} replace />)} />
+        <Route path="/bot" element={<Davinci setAuth={setAuth} />} />
+        <Route path="/" element={<Landing setAuth={setAuth} />}/>
       </Routes>
     </>
   );

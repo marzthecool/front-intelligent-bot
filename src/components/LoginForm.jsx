@@ -4,6 +4,7 @@ import { Form, FormikProvider, useFormik } from "formik";
 import * as Yup from "yup";
 import UserService from "../services/users.service";
 
+
 import {
   Box,
   Checkbox,
@@ -31,17 +32,7 @@ const animate = {
 };
 
 const LoginForm = ({ setAuth }) => {
-  const login = (email, password) => {
-  
-    console.log("Entre a login");
-    UserService.login(email, password);
-    //e.preventDefault();  
-  }
-  
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/bot";
-
   const [showPassword, setShowPassword] = useState(false);
 
   const LoginSchema = Yup.object().shape({
@@ -51,6 +42,11 @@ const LoginForm = ({ setAuth }) => {
     password: Yup.string().required(t("password_empty")),
   });
 
+  const login = (email, password) => {
+    console.log("Entre a login");
+    UserService.login(email, password);
+  }
+  
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -59,12 +55,13 @@ const LoginForm = ({ setAuth }) => {
     },
     validationSchema: LoginSchema,
     onSubmit: (values) => {
+      sessionStorage.setItem("usuario", values.email);
       login(values.email,values.password);
       console.log("submitting...");
       setTimeout(() => {
         console.log("submited!!");
         setAuth(true);
-        navigate(from, { replace: true });
+        navigate(`/bot`, { replace: true });
       }, 2000);
     },
   });

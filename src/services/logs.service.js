@@ -22,7 +22,7 @@ class LogsService {
             },
         })
             .then((response) => {
-                console.log("Log creado?");
+                console.log("Log creado!");
                 console.log(response.json());
             })
             .then((data) => {

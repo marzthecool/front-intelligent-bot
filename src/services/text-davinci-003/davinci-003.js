@@ -3,7 +3,7 @@ import { Configuration, OpenAIApi } from "openai";
 class DaVinciText {
   async getDaVinci(data) {
     const configuration = new Configuration({
-        apiKey: "APIKEY",
+        apiKey: "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",
       });
     const openai = new OpenAIApi(configuration);
     console.log(configuration);

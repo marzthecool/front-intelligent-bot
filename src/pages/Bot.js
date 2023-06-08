@@ -1,6 +1,7 @@
 import { Button, Typography, Container} from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
+//TRASH
 const Bot = ({ setAuth }) => {
   const theme = useTheme();
 

@@ -1,13 +1,8 @@
-//import firebase from "../firebase";
-
-//const db = firebase.collection("/memes");
-
 class UserService {
 
     url = 'http://localhost:8080/api';
 
     signup = async (name, email, password, age, comments) => {
-
         await fetch(this.url+"/users", {
             method: 'POST',
             body: JSON.stringify({
@@ -31,7 +26,29 @@ class UserService {
             .catch((err) => {
                 console.log(err.message);
             });
-        }
+    }
+
+    data = async (email) => {
+        await fetch(this.url+"/users", {
+            method: 'GET',
+            body: JSON.stringify({
+                email: email,
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+            .then((response) => {
+                console.log("Registro el usuario con pswrd");
+                console.log(response.json());
+            })
+            .then((data) => {
+                console.log(data);
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
+    }
 
     login = async (email, password) => {
 
@@ -45,16 +62,18 @@ class UserService {
             'Content-type': 'application/json; charset=UTF-8',
         },
     })
-        .then((response) => {
-            console.log("Logeo el usuario con pswrd");
-            console.log(response.json());
-        })
-        .then((data) => {
-            console.log(data);
-        })
-        .catch((err) => {
-            console.log(err.message);
+    .then(function (response){
+        console.log("Logeo el usuario con pswrd");
+        response.json().then(function(datos) {
+            sessionStorage.setItem("id", datos.id);
         });
+    })
+    .then((data) => {
+        console.log(data);
+    })
+    .catch((err) => {
+        console.log(err.message);
+    });
     }
 
     comment(id) {

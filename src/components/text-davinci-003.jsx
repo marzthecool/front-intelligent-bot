@@ -7,6 +7,7 @@ import LogService from "../services/logs.service";
 import { Configuration, OpenAIApi } from "openai";
 
 export default function Textdavinci003() {
+  var id = sessionStorage.getItem("id");
   //Completion
   const [animalInput, setAnimalInput] = useState("");
   const [result, setResult] = useState("");
@@ -18,66 +19,43 @@ export default function Textdavinci003() {
   const [categories, setCategories] = useState("");
 
   const configuration = new Configuration({
-    apiKey: "LLAVEAPI",
+    apiKey: "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",
   });
   const openai = new OpenAIApi(configuration);
 
   //Image
   async function generateImage(event){
     event.preventDefault();
-    const response = await openai.createImage({
-      prompt: prompt,
-      n: 1,
-      size: "512x512",
-    });
-    console.log(response.data.data[0].url)
-    setImage(response.data.data[0].url);
-    //res.send(response.data.data[0].url);
+    try{
+      const response = await openai.createImage({
+        prompt: prompt,
+        n: 1,
+        size: "512x512",
+      });
+      console.log(response.data.data[0].url)
+      setImage(response.data.data[0].url);
+    }
+    catch(error) {
+      LogForm("Imagenes", prompt);
+    }
   };
 
   //Moderation
   async function moderateText(event) {
     event.preventDefault();
-    const response = await openai.createModeration({
-      input: input,
-    });
-    console.log(response.data.results[0].categories);
-    setCategories(response.data.results[0].categories);
-  }
-  /*
-  async function moderateText(event) {
-    event.preventDefault();
-    const apiKey = "";
-    const endpoint = 'https://api.openai.com/v1/engines/davinci/moderation/ratepoints';
-  
-    try {
-      const response = await axios.post(endpoint, {
-        model: 'davinci',
-        thresholds: {
-          'identity_attack': 0.6,
-          'insult': 0.8,
-          'profanity': 0.5,
-        },
-        modPrompt: modPrompt,
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${apiKey}`,
-        },
+    try{
+      const response = await openai.createModeration({
+        input: input,
       });
-  
-      if (response.status === 200 && response.data && response.data.choices && response.data.choices.length > 0) {
-        const moderationResult = response.data.choices[0];
-        return moderationResult;
-      } else {
-        throw new Error('Failed to moderate text.');
-      }
-    } catch (error) {
-      console.error('Error moderating text:', error.message);
-      return null;
+      console.log(response.data.results[0].categories);
+      setCategories(response.data.results[0].categories);
     }
+    catch(error){
+      LogForm("Moderador", input);
+    }
+    
   }
-*/
+
   //Completion
   async function onSubmit(event) {
     event.preventDefault();
@@ -85,27 +63,18 @@ export default function Textdavinci003() {
       const response = await DaVinciText.getDaVinci({ animal: animalInput });
 
       const data = await response;
-      console.log(response);
       if (response.status !== 200) {
         throw data.error || new Error(`Request failed with status ${response.status}`);
       }
-      console.log("response", response);
       setResult(data.result);
-
       setAnimalInput("");
     } catch(error) {
-      // Consider implementing your own error handling logic here
-      console.error(error);
-      alert(error.message);
+      LogForm("Davinci", animalInput);
     }
   }
-  const LogForm = ({ _setAuth }) => {
-    //const log = (userid, model, prompt, result) => {
-    
-      console.log("Entre a logs");
-      LogService.createLog(1, "DaVinci", "How are you?", "Fine, thank you!");
-      //e.preventDefault();  
-    //}
+  const LogForm = (modelo, pregunta) => {    
+      console.log("Envie un log");
+      LogService.createLog( id, modelo, pregunta, "Request Failed");
   }
   
   return (
@@ -121,7 +90,8 @@ export default function Textdavinci003() {
           value={animalInput}
           onChange={(e) => setAnimalInput(e.target.value)}
         />
-        <input type="submit" value="Preguntar" />
+  
+        <input type="submit" value="Preguntar"/>
       </form>
 
       {/* Image generator */}
@@ -150,8 +120,6 @@ export default function Textdavinci003() {
         </button>
       </form>
       
-      
-      <button onClick={LogForm}>Test LogForm</button>
       <div className={styles.result}>{result}</div>
       {imageURL.length > 0 ? <img src={imageURL} alt="imageURL" /> : <></>}
       <div className={styles.result}>
