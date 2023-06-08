@@ -5,9 +5,13 @@ import DaVinciText from "../services/text-davinci-003/davinci-003"
 import LogService from "../services/logs.service";
 //import "./App.css";
 import { Configuration, OpenAIApi } from "openai";
+import { Container } from "@mui/material";
 
 export default function Textdavinci003() {
   var id = sessionStorage.getItem("id");
+  LogService.showLogs();
+  var test = JSON.parse(localStorage.getItem("logs"));
+  //BASE DE DATOS DE TODOS LOS LOGS. MI DABTABSE
   //Completion
   const [animalInput, setAnimalInput] = useState("");
   const [result, setResult] = useState("");
@@ -53,7 +57,6 @@ export default function Textdavinci003() {
     catch(error){
       LogForm("Moderador", input);
     }
-    
   }
 
   //Completion
@@ -75,6 +78,12 @@ export default function Textdavinci003() {
   const LogForm = (modelo, pregunta) => {    
       console.log("Envie un log");
       LogService.createLog( id, modelo, pregunta, "Request Failed");
+  }
+
+  function impresion() {
+    for (var i = 0; i < test.length; i++) {
+      console.log(test[i]);
+    }
   }
   
   return (
@@ -125,7 +134,18 @@ export default function Textdavinci003() {
       <div className={styles.result}>
       {JSON.stringify(categories)}
       </div>
-      </main>
-    </div>
-  );
-}
+      <Container> 
+      {test
+              .map((log, index) => (
+                <p key={index}>
+                  {log.userid}
+                  {log.modelo}
+                  {log.prompt}
+                  {log.result}
+                </p>
+              ))}
+      </Container>
+      
+    </main>
+  </div>
+);}

@@ -27,7 +27,7 @@ class UserService {
                 console.log(err.message);
             });
     }
-
+    /*
     data = async (email) => {
         await fetch(this.url+"/users", {
             method: 'GET',
@@ -49,7 +49,7 @@ class UserService {
                 console.log(err.message);
             });
     }
-
+    */
     login = async (email, password) => {
 
     await fetch(this.url+"/login", {

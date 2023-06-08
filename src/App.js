@@ -5,7 +5,6 @@ import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Landing from "./pages/Landing";
-import Bot from "./pages/Bot";
 import Davinci from "./components/text-davinci-003"
 import { useTranslation } from "react-i18next";
 
