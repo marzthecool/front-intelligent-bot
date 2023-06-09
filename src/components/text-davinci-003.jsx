@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 //import axios from "axios";
 import styles from "./text-davinci-003.css";
 import DaVinciText from "../services/text-davinci-003/davinci-003"
@@ -8,9 +8,7 @@ import { Configuration, OpenAIApi } from "openai";
 import { Container } from "@mui/material";
 
 export default function Textdavinci003() {
-  var id = sessionStorage.getItem("id");
-  LogService.showLogs();
-  var test = JSON.parse(localStorage.getItem("logs"));
+  const id = parseInt(sessionStorage.getItem('id'));
   //BASE DE DATOS DE TODOS LOS LOGS. MI DABTABSE
   //Completion
   const [animalInput, setAnimalInput] = useState("");
@@ -21,6 +19,19 @@ export default function Textdavinci003() {
   //moderation
   const [input, setInput] = useState("");
   const [categories, setCategories] = useState("");
+
+  const [logs, setLogs] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await LogService.getAllLogs();
+
+      const logsData = JSON.parse(localStorage.getItem('logs'));
+      setLogs(logsData || []);
+    };
+
+    fetchData();
+  }, []);
 
   const configuration = new Configuration({
     apiKey: "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",
@@ -134,16 +145,18 @@ export default function Textdavinci003() {
       <div className={styles.result}>
       {JSON.stringify(categories)}
       </div>
+
       <Container> 
-      {test
-              .map((log, index) => (
-                <p key={index}>
-                  {log.userid}
-                  {log.modelo}
-                  {log.prompt}
-                  {log.result}
-                </p>
-              ))}
+        {logs
+          .filter((log) => log.userid === id)
+          .map((log, index) => (
+            <p key={index}>
+              {log.userid} 
+              {log.model} 
+              {log.prompt} 
+              {log.result}
+            </p>
+          ))}
       </Container>
       
     </main>

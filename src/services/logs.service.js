@@ -18,8 +18,7 @@ class LogsService {
             },
         })
             .then((response) => {
-                console.log("Log creado!");
-                console.log(response.json());
+                console.log("Log creado!", response.json());
             })
             .then((data) => {
                 console.log(data);
@@ -29,8 +28,8 @@ class LogsService {
             });
         }
 
-    showLogs = async () => {
-            console.log("Entre a showLogs");
+    getAllLogs = async () => {
+            console.log("Entre a getAllLogs");
             await fetch(this.url+"/logs", {
                 method: 'GET',
                 headers: {
@@ -38,14 +37,15 @@ class LogsService {
                     'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjg0OTY4ODA0LCJleHAiOjE3NzEzNjg4MDR9.Uez2VPCifl9Bt6PQDT3fOzLTPpRRD6PYvJno3977RIs'
                 },
             })
-            .then(function (response){
+            .then((response) => {
                 console.log("Guarde los LOGS");
-                response.json().then(function(datos) {
-                    localStorage.setItem("logs", JSON.stringify(datos.logs));
+                response.json().then(function(data) {
+                    localStorage.setItem("logs", JSON.stringify(data.logs));
+                    return data.logs;
                 });
             })
             .then((data) => {
-                console.log(data);
+                // console.log(data);
             })
             .catch((err) => {
                 console.log(err.message);
