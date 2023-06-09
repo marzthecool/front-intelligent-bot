@@ -3,6 +3,7 @@ import SmartToyIcon from '@mui/icons-material/SmartToy';
 import {Grid, Box, AppBar, Toolbar, Typography} from '@mui/material';
 import { useTranslation } from "react-i18next";
 import LanguageSelect from "./LanguageSelect";
+import LogOutButton from "./LogOut";
 
 
 const Navbar = () => {
@@ -32,7 +33,11 @@ const Navbar = () => {
                 INTELLIGENT-BOT
               </Typography>
             </Toolbar>
+            
           </Grid>
+
+          <LogOutButton/>
+
           <div className="flex flex-fixed">
             <div className="ml1 pointer black">
               {t('select_language')}

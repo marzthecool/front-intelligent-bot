@@ -5,10 +5,11 @@ import DaVinciText from "../services/text-davinci-003/davinci-003"
 import LogService from "../services/logs.service";
 //import "./App.css";
 import { Configuration, OpenAIApi } from "openai";
-import { Container } from "@mui/material";
+import { Container, Button, ButtonGroup  } from "@mui/material";
 
 export default function Textdavinci003() {
   const id = parseInt(sessionStorage.getItem('id'));
+  console.log(id);
   //BASE DE DATOS DE TODOS LOS LOGS. MI DABTABSE
   //Completion
   const [animalInput, setAnimalInput] = useState("");
@@ -21,6 +22,8 @@ export default function Textdavinci003() {
   const [categories, setCategories] = useState("");
 
   const [logs, setLogs] = useState([]);
+  
+  const [model, setModel] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -86,79 +89,88 @@ export default function Textdavinci003() {
       LogForm("Davinci", animalInput);
     }
   }
+
   const LogForm = (modelo, pregunta) => {    
       console.log("Envie un log");
       LogService.createLog( id, modelo, pregunta, "Request Failed");
   }
 
-  function impresion() {
-    for (var i = 0; i < test.length; i++) {
-      console.log(test[i]);
+  function showModels(chosenModel) {
+    if (chosenModel === "Davinci") {
+      return (
+        <form onSubmit={onSubmit}>
+          <input
+            type="text"
+            name="animal"
+            placeholder="Ingresa tu peticion"
+            value={animalInput}
+            onChange={(e) => setAnimalInput(e.target.value)}
+          />
+
+          <input type="submit" value="Preguntar"/>
+        </form>
+      )
+    } else if (chosenModel === "Imagenes") {
+      return (
+        <form>
+          <input
+            className="app-input"
+            placeholder="Ingresa tu imagen a generar"
+            onChange={(e) => setPrompt(e.target.value)}
+          />
+  
+          <button onClick={generateImage}>
+            Generar
+          </button>
+        </form>
+      )
+    }
+    else if (chosenModel === "Moderador") {
+      return (
+        <form>
+          <input
+            className="moderation"
+            placeholder="Ingresa tu texto a verificar"
+            onChange={(e) => setInput(e.target.value)}
+          />
+  
+          <button onClick={moderateText}>
+            Verificar
+          </button>
+        </form>
+      )  
     }
   }
   
   return (
     <div>
       <main className={styles.main}>
-      <h3>DaVinciBot</h3>
-      
-      <form onSubmit={onSubmit}>
-        <input
-          type="text"
-          name="animal"
-          placeholder="Ingresa tu peticion"
-          value={animalInput}
-          onChange={(e) => setAnimalInput(e.target.value)}
-        />
-  
-        <input type="submit" value="Preguntar"/>
-      </form>
+        <h3>Intelligent-Bot</h3>
 
-      {/* Image generator */}
-      <form>
-        <input
-          className="app-input"
-          placeholder="Ingresa tu imagen a generar"
-          onChange={(e) => setPrompt(e.target.value)}
-        />
+        <Container>
+          <ButtonGroup variant="contained" aria-label="outlined primary button group">
+            <Button onClick={() => setModel('Davinci')}>DaVinci</Button>
+            <Button onClick={() => setModel('Imagenes')}>Imágenes</Button>
+            <Button onClick={() => setModel('Moderador')}>Moderador</Button>
+          </ButtonGroup>
+        </Container>
 
-        <button onClick={generateImage}>
-          Generar
-        </button>
-      </form>
+        {showModels(model)}
 
-      {/* Moderation */}
-      <form>
-        <input
-          className="moderation"
-          placeholder="Ingresa tu texto a verificar"
-          onChange={(e) => setInput(e.target.value)}
-        />
-
-        <button onClick={moderateText}>
-          Verificar
-        </button>
-      </form>
-      
-      <div className={styles.result}>{result}</div>
-      {imageURL.length > 0 ? <img src={imageURL} alt="imageURL" /> : <></>}
-      <div className={styles.result}>
-      {JSON.stringify(categories)}
-      </div>
-
-      <Container> 
-        {logs
-          .filter((log) => log.userid === id)
-          .map((log, index) => (
-            <p key={index}>
-              {log.userid} 
-              {log.model} 
-              {log.prompt} 
-              {log.result}
-            </p>
-          ))}
-      </Container>
-      
-    </main>
-  </div>
-);}
+        <Container> 
+          {logs
+            .filter((log) => log.userid === id || log.model === model) 
+            .map((log, index) => (
+              <p key={index}>
+                {log.userid} 
+                {log.model} 
+                {log.prompt} 
+                {log.result}
+              </p>
+            ))}
+        </Container>
+        
+      </main>
+    </div>
+  );
+}
